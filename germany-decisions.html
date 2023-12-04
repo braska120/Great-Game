@@ -12,9 +12,16 @@
     <p>Solving the Great Depression</p>
     <p>Effect of the Great Depression on Our Economy: </p>
     <p id="effect"></p>
+    <button id:"econDecision1">Improve the Economy</button>
 <script>
     let economicHarm = "Severe"
+
+    function updateEconomicHarm
+        economicHarm = "Great"
+        document.getElementById("effect").innerHTML = economicHarm;
+
     document.getElementById("effect").innerHTML = economicHarm;
+    document.getElementbyId("econDecision1").addEventListener("click", updateEconomicHarm);
 </script>
 
 <a href="index.html">Return to Main Page</a>
