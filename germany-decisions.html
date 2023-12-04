@@ -15,10 +15,11 @@
 <script>
     let economicHarm = "Severe"
 
-    function updateEconomicHarm()
+    function updateEconomicHarm(){
         economicHarm = "Great"
         document.getElementById("effect").innerHTML = economicHarm;
-
+    }
+    
     document.getElementById("effect").innerHTML = economicHarm;
     document.getElementById("econDecision1").addEventListener("click", updateEconomicHarm);
 </script>
