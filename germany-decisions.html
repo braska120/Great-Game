@@ -11,16 +11,16 @@
     <h1>Germany Decisions</h1>
     <p><b>Solving the Great Depression</b></p>
     <p>Effect of the Great Depression on Our Economy: <span id="effect"></span></p>
-    <button id:"econDecision1">Improve the Economy</button>
+    <button id="econDecision1">Improve the Economy</button>
 <script>
     let economicHarm = "Severe"
 
-    function updateEconomicHarm
+    function updateEconomicHarm()
         economicHarm = "Great"
         document.getElementById("effect").innerHTML = economicHarm;
 
     document.getElementById("effect").innerHTML = economicHarm;
-    document.getElementbyId("econDecision1").addEventListener("click", updateEconomicHarm);
+    document.getElementById("econDecision1").addEventListener("click", updateEconomicHarm);
 </script>
 
 <a href="index.html">Return to Main Page</a>
