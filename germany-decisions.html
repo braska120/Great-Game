@@ -10,6 +10,25 @@
 <body>
     <h1>This is the Subpage</h1>
     <p>Content goes here.</p>
-    <a href="index.html">Return to Main Page</a>
+
+    <!-- This is the button that will change a variable.-->
+<p id="displayVariable">Current Variable Value: <span id="variableValue">Your Initial Value</span></p>
+<button id="changeButton">Change Variable</button>
+<script>
+var myVariable = "Your Initial Value";
+function changeVariable() {
+    myVariable = "New Value";
+    document.getElementById("variableValue").textContent = myVariable;
+}
+document.getElementById("changeButton").addEventListener("click", changeVariable);
+</script>
+
+
+<a href="index.html">Return to Main Page</a>
+    
 </body>
+
+<script>
+    var German_Chancellor = "Franz von Papen";
+</script>
 </html>
