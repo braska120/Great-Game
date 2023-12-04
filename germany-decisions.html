@@ -13,7 +13,7 @@
     <p>Effect of the Great Depression on Our Economy: <span id="effect"></span></p>
     <button id="econDecision1">Improve the Economy</button>
 <script>
-    let economicHarm = "Severe"
+    let economicHarm = localStorage.getItem("economicHarm") || "Severe";
 
     function updateEconomicHarm(){
         economicHarm = "Great"
