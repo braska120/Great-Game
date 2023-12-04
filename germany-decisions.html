@@ -16,13 +16,32 @@
     let economicHarm = localStorage.getItem("economicHarm") || "Severe";
 
     function updateEconomicHarm(){
-        economicHarm = "Great"
+        const levels = ["Severe", "Extremely High", "High", "Concerning", "Minor", "Non-Existant"];
+        const currentIndex = levels.indexOf(economicharm);
+        const nextIndex = levels[nextIndex];
         document.getElementById("effect").innerHTML = economicHarm;
+        localStorage.setItem("economicHarm", economicHarm);
     }
+
+    function resetCycle() {
+            // Reset the economic harm level to "Severe"
+            economicHarm = "Severe";
+            
+            // Display the updated value
+            document.getElementById("effect").innerHTML = economicHarm;
+
+            // Save the updated value to localStorage
+            localStorage.setItem("economicHarm", economicHarm);
+        }
     
     document.getElementById("effect").innerHTML = economicHarm;
     document.getElementById("econDecision1").addEventListener("click", updateEconomicHarm);
+    document.getElementById("resetCycle").addEventListener("click", resetCycle);
+
 </script>
+
+<button id="resetCycle">Reset Cycle</button>
+
 
 <a href="index.html">Return to Main Page</a>
     
