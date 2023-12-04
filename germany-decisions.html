@@ -17,8 +17,8 @@
 
     function updateEconomicHarm(){
         const levels = ["Severe", "Extremely High", "High", "Concerning", "Minor", "Non-Existant"];
-        const currentIndex = levels.indexOf(economicharm);
-        const nextIndex = levels[nextIndex];
+        const currentIndex = levels.indexOf(economicHarm);
+        const nextIndex = (currentIndex + 1) % levels.length;
         document.getElementById("effect").innerHTML = economicHarm;
         localStorage.setItem("economicHarm", economicHarm);
     }
