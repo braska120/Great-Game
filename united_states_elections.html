@@ -13,7 +13,7 @@
 <body>
     <h1>Election Simulator</h1>
     <object id="electionMap" type="image/svg+xml" data="mapofuswithstates.svg"></object>
-    <div>
+    <div id="campaignButtons">
         <button id="campaignDemocrats">Campaign for Democrats</button>
         <button id="campaignRepublicans">Campaign for Republicans</button>
     </div>
@@ -25,31 +25,37 @@
 
         document.getElementById('campaignDemocrats').addEventListener('click', function() {
             isCampaignSelected = true;
+            document.getElementById('campaignButtons').style.display = 'none';
             enableMapInteractivity();
         });
 
         document.getElementById('campaignRepublicans').addEventListener('click', function() {
             isCampaignSelected = true;
+            document.getElementById('campaignButtons').style.display = 'none';
             enableMapInteractivity();
         });
 
         document.getElementById('electionMap').addEventListener('load', function() {
             svgDoc = this.contentDocument;
-            alert("Please select a campaign to start.");
+            setupMapClickHandler();
         });
 
-        function enableMapInteractivity() {
+        function setupMapClickHandler() {
             const states = svgDoc.querySelectorAll('path');
             
             states.forEach(function(state) {
                 state.addEventListener('click', function() {
-                    if (isCampaignSelected) {
-                        updateStateInfo(this.id);
-                    } else {
+                    if (!isCampaignSelected) {
                         alert("Please select a campaign first!");
+                        return;
                     }
+                    updateStateInfo(this.id);
                 });
             });
+        }
+
+        function enableMapInteractivity() {
+            // Functionality to enable map interactivity can be added here if needed
         }
 
         function updateStateInfo(stateId) {
