@@ -17,20 +17,27 @@
     
     <script>
         document.getElementById('electionMap').addEventListener('load', function() {
-            const svgDoc = this.contentDocument;
-            const states = svgDoc.querySelectorAll('path');
-            
-            states.forEach(function(state) {
-                state.addEventListener('click', function() {
-                    const stateName = this.getAttribute('data-name') || this.id;
-                    updateStateInfo(`You have clicked on ${stateName}`);
-                });
-            });
+    const svgDoc = this.contentDocument;
+    const states = svgDoc.querySelectorAll('path');
+    
+    states.forEach(function(state) {
+        state.addEventListener('click', function() {
+            updateStateInfo(this.id);
         });
+    });
+});
 
-        function updateStateInfo(text) {
-            document.getElementById('stateInfo').textContent = text;
-        }
+function updateStateInfo(stateId) {
+    let text;
+    if (stateId === "TX") {
+        text = `Texas Democratic Support: 87.08%, Republican Support: 12.32%, Overall Lean: Democratic`;
+    } else {
+        text = `You have clicked on ${stateId}`;
+    }
+
+    document.getElementById('stateInfo').textContent = text;
+}
+
     </script>
 </body>
 </html>
