@@ -27,16 +27,20 @@
     });
 });
 
+        
+
 function updateStateInfo(stateId) {
     let text;
     if (stateId === "TX") {
         text = `Texas Democratic Support: 87.08%, Republican Support: 12.32%, Overall Lean: Democratic`;
     } else {
-        text = `You have clicked on ${stateId}`;
+        const stateName = this.contentDocument.querySelector(`#${stateId}`).getAttribute('data-name') || stateId;
+        text = `You have clicked on ${stateName}`;
     }
 
     document.getElementById('stateInfo').textContent = text;
 }
+
 
     </script>
 </body>
