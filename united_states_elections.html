@@ -8,6 +8,7 @@
             font-size: 16px;
             color: #333;
         }
+        /* Additional styles can be added here */
     </style>
 </head>
 <body>
@@ -23,28 +24,76 @@
         let isCampaignSelected = false;
         let selectedCampaign = "";
         let svgDoc;
-        let texasData = {
-            democraticSupport: 87.08, // Initial support
-            republicanSupport: 12.32
+        let stateData = {
+let stateData = {
+    'AL': { democraticSupport: 97.03, republicanSupport: 2.8 },
+    'AR': { democraticSupport: 81.80, republicanSupport: 17.86 },
+    'AZ': { democraticSupport: 69.85, republicanSupport: 26.93 },
+    'CA': { democraticSupport: 66.95, republicanSupport: 31.70 },
+    'CO': { democraticSupport: 50, republicanSupport: 50 },
+    'CT': { democraticSupport: 50, republicanSupport: 50 },
+    'DE': { democraticSupport: 50, republicanSupport: 50 },
+    'FL': { democraticSupport: 50, republicanSupport: 50 },
+    'GA': { democraticSupport: 50, republicanSupport: 50 },
+    'IA': { democraticSupport: 50, republicanSupport: 50 },
+    'ID': { democraticSupport: 50, republicanSupport: 50 },
+    'IL': { democraticSupport: 50, republicanSupport: 50 },
+    'IN': { democraticSupport: 50, republicanSupport: 50 },
+    'KS': { democraticSupport: 50, republicanSupport: 50 },
+    'KY': { democraticSupport: 50, republicanSupport: 50 },
+    'LA': { democraticSupport: 50, republicanSupport: 50 },
+    'MA': { democraticSupport: 50, republicanSupport: 50 },
+    'MD': { democraticSupport: 50, republicanSupport: 50 },
+    'ME': { democraticSupport: 50, republicanSupport: 50 },
+    'MI': { democraticSupport: 50, republicanSupport: 50 },
+    'MN': { democraticSupport: 50, republicanSupport: 50 },
+    'MO': { democraticSupport: 50, republicanSupport: 50 },
+    'MS': { democraticSupport: 50, republicanSupport: 50 },
+    'MT': { democraticSupport: 50, republicanSupport: 50 },
+    'NC': { democraticSupport: 50, republicanSupport: 50 },
+    'ND': { democraticSupport: 50, republicanSupport: 50 },
+    'NE': { democraticSupport: 50, republicanSupport: 50 },
+    'NH': { democraticSupport: 50, republicanSupport: 50 },
+    'NJ': { democraticSupport: 50, republicanSupport: 50 },
+    'NM': { democraticSupport: 50, republicanSupport: 50 },
+    'NV': { democraticSupport: 50, republicanSupport: 50 },
+    'NY': { democraticSupport: 50, republicanSupport: 50 },
+    'OH': { democraticSupport: 50, republicanSupport: 50 },
+    'OK': { democraticSupport: 50, republicanSupport: 50 },
+    'OR': { democraticSupport: 50, republicanSupport: 50 },
+    'PA': { democraticSupport: 50, republicanSupport: 50 },
+    'RI': { democraticSupport: 50, republicanSupport: 50 },
+    'SC': { democraticSupport: 50, republicanSupport: 50 },
+    'SD': { democraticSupport: 50, republicanSupport: 50 },
+    'TN': { democraticSupport: 50, republicanSupport: 50 },
+    'TX': { democraticSupport: 87.08, republicanSupport: 12.32 },
+    'UT': { democraticSupport: 50, republicanSupport: 50 },
+    'VA': { democraticSupport: 50, republicanSupport: 50 },
+    'VT': { democraticSupport: 50, republicanSupport: 50 },
+    'WA': { democraticSupport: 50, republicanSupport: 50 },
+    'WI': { democraticSupport: 50, republicanSupport: 50 },
+    'WV': { democraticSupport: 50, republicanSupport: 50 },
+    'WY': { democraticSupport: 50, republicanSupport: 50 }
+};
+
         };
 
         document.getElementById('campaignDemocrats').addEventListener('click', function() {
             isCampaignSelected = true;
             selectedCampaign = "Democrats";
             document.getElementById('campaignButtons').style.display = 'none';
-            enableMapInteractivity();
+            setupMapClickHandler();
         });
 
         document.getElementById('campaignRepublicans').addEventListener('click', function() {
             isCampaignSelected = true;
             selectedCampaign = "Republicans";
             document.getElementById('campaignButtons').style.display = 'none';
-            enableMapInteractivity();
+            setupMapClickHandler();
         });
 
         document.getElementById('electionMap').addEventListener('load', function() {
             svgDoc = this.contentDocument;
-            setupMapClickHandler();
         });
 
         function setupMapClickHandler() {
@@ -61,46 +110,37 @@
             });
         }
 
-
-
         function updateStateInfo(stateId) {
-            let text;
-            if (stateId === "TX") {
-                text = `Texas Democratic Support: ${texasData.democraticSupport.toFixed(2)}%, Republican Support: ${texasData.republicanSupport.toFixed(2)}%, Overall Lean: Democratic`;
-                text += `<br><button id="campaignInTexas">Campaign in Texas</button>`;
+            const stateElement = svgDoc.querySelector(`#${stateId}`);
+            const stateName = stateElement ? stateElement.getAttribute('data-name') : 'Unknown State';
+            let text = `<strong>${stateName}</strong><br>`; // Display the state name in bold
+
+            if (stateId === "AK" || stateId === "HI") {
+                text += "This territory has no electoral votes. Therefore, no campaign is available.";
+            } else if (stateData[stateId]) {
+                text += `Democratic Support: ${stateData[stateId].democraticSupport.toFixed(2)}%, Republican Support: ${stateData[stateId].republicanSupport.toFixed(2)}%`;
+                text += `<br><button onclick="campaignInState('${stateId}')">Campaign in ${stateName}</button>`;
             } else {
-                const stateElement = svgDoc.querySelector(`#${stateId}`);
-                const stateName = stateElement ? stateElement.getAttribute('data-name') : 'Unknown State';
-                text = `You have clicked on ${stateName}`;
+                text += "You have clicked on this state.";
             }
 
-            document.getElementById('stateInfo').innerHTML = text; // Use innerHTML to include button
-
-            // Add event listener to the new button
-            const campaignButton = document.getElementById('campaignInTexas');
-            if (campaignButton) {
-                campaignButton.addEventListener('click', function() {
-                    campaignInTexas();
-                });
-            }
+            document.getElementById('stateInfo').innerHTML = text;
         }
 
-function campaignInTexas() {
-    const campaignBoost = 1.5; // The amount of support to add or subtract
+        function campaignInState(stateId) {
+            const campaignBoost = 1.5;
+            if (!stateData[stateId]) return;
 
-    if (selectedCampaign === "Democrats") {
-        // Increase Democratic support and decrease Republican support
-        texasData.democraticSupport = Math.min(texasData.democraticSupport + campaignBoost, 100);
-        texasData.republicanSupport = Math.max(100 - texasData.democraticSupport, 0);
-    } else if (selectedCampaign === "Republicans") {
-        // Increase Republican support and decrease Democratic support
-        texasData.republicanSupport = Math.min(texasData.republicanSupport + campaignBoost, 100);
-        texasData.democraticSupport = Math.max(100 - texasData.republicanSupport, 0);
-    }
+            if (selectedCampaign === "Democrats") {
+                stateData[stateId].democraticSupport = Math.min(stateData[stateId].democraticSupport + campaignBoost, 100);
+                stateData[stateId].republicanSupport = Math.max(100 - stateData[stateId].democraticSupport, 0);
+            } else if (selectedCampaign === "Republicans") {
+                stateData[stateId].republicanSupport = Math.min(stateData[stateId].republicanSupport + campaignBoost, 100);
+                stateData[stateId].democraticSupport = Math.max(100 - stateData[stateId].republicanSupport, 0);
+            }
 
-    updateStateInfo('TX'); // Update the displayed info
-}
-
+            updateStateInfo(stateId);
+        }
     </script>
 </body>
 </html>
