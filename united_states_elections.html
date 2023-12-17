@@ -25,97 +25,87 @@
         let selectedCampaign = "";
         let svgDoc;
         let stateData = {
-let stateData = {
-    'AL': { democraticSupport: 97.03, republicanSupport: 2.8 },
-    'AR': { democraticSupport: 81.80, republicanSupport: 17.86 },
-    'AZ': { democraticSupport: 69.85, republicanSupport: 26.93 },
-    'CA': { democraticSupport: 66.95, republicanSupport: 31.70 },
-    'CO': { democraticSupport: 50, republicanSupport: 50 },
-    'CT': { democraticSupport: 50, republicanSupport: 50 },
-    'DE': { democraticSupport: 50, republicanSupport: 50 },
-    'FL': { democraticSupport: 50, republicanSupport: 50 },
-    'GA': { democraticSupport: 50, republicanSupport: 50 },
-    'IA': { democraticSupport: 50, republicanSupport: 50 },
-    'ID': { democraticSupport: 50, republicanSupport: 50 },
-    'IL': { democraticSupport: 50, republicanSupport: 50 },
-    'IN': { democraticSupport: 50, republicanSupport: 50 },
-    'KS': { democraticSupport: 50, republicanSupport: 50 },
-    'KY': { democraticSupport: 50, republicanSupport: 50 },
-    'LA': { democraticSupport: 50, republicanSupport: 50 },
-    'MA': { democraticSupport: 50, republicanSupport: 50 },
-    'MD': { democraticSupport: 50, republicanSupport: 50 },
-    'ME': { democraticSupport: 50, republicanSupport: 50 },
-    'MI': { democraticSupport: 50, republicanSupport: 50 },
-    'MN': { democraticSupport: 50, republicanSupport: 50 },
-    'MO': { democraticSupport: 50, republicanSupport: 50 },
-    'MS': { democraticSupport: 50, republicanSupport: 50 },
-    'MT': { democraticSupport: 50, republicanSupport: 50 },
-    'NC': { democraticSupport: 50, republicanSupport: 50 },
-    'ND': { democraticSupport: 50, republicanSupport: 50 },
-    'NE': { democraticSupport: 50, republicanSupport: 50 },
-    'NH': { democraticSupport: 50, republicanSupport: 50 },
-    'NJ': { democraticSupport: 50, republicanSupport: 50 },
-    'NM': { democraticSupport: 50, republicanSupport: 50 },
-    'NV': { democraticSupport: 50, republicanSupport: 50 },
-    'NY': { democraticSupport: 50, republicanSupport: 50 },
-    'OH': { democraticSupport: 50, republicanSupport: 50 },
-    'OK': { democraticSupport: 50, republicanSupport: 50 },
-    'OR': { democraticSupport: 50, republicanSupport: 50 },
-    'PA': { democraticSupport: 50, republicanSupport: 50 },
-    'RI': { democraticSupport: 50, republicanSupport: 50 },
-    'SC': { democraticSupport: 50, republicanSupport: 50 },
-    'SD': { democraticSupport: 50, republicanSupport: 50 },
-    'TN': { democraticSupport: 50, republicanSupport: 50 },
-    'TX': { democraticSupport: 87.08, republicanSupport: 12.32 },
-    'UT': { democraticSupport: 50, republicanSupport: 50 },
-    'VA': { democraticSupport: 50, republicanSupport: 50 },
-    'VT': { democraticSupport: 50, republicanSupport: 50 },
-    'WA': { democraticSupport: 50, republicanSupport: 50 },
-    'WI': { democraticSupport: 50, republicanSupport: 50 },
-    'WV': { democraticSupport: 50, republicanSupport: 50 },
-    'WY': { democraticSupport: 50, republicanSupport: 50 }
-};
+        'AL': { democraticSupport: 97.03, republicanSupport: 2.8 },
+        'AR': { democraticSupport: 81.80, republicanSupport: 17.86 },
+        'AZ': { democraticSupport: 69.85, republicanSupport: 26.93 },
+        'CA': { democraticSupport: 66.95, republicanSupport: 31.70 },
+        'CO': { democraticSupport: 50, republicanSupport: 50 },
+        'CT': { democraticSupport: 50, republicanSupport: 50 },
+        'DE': { democraticSupport: 50, republicanSupport: 50 },
+        'FL': { democraticSupport: 50, republicanSupport: 50 },
+        'GA': { democraticSupport: 50, republicanSupport: 50 },
+        'IA': { democraticSupport: 50, republicanSupport: 50 },
+        'ID': { democraticSupport: 50, republicanSupport: 50 },
+        'IL': { democraticSupport: 50, republicanSupport: 50 },
+        'IN': { democraticSupport: 50, republicanSupport: 50 },
+        'KS': { democraticSupport: 50, republicanSupport: 50 },
+        'KY': { democraticSupport: 50, republicanSupport: 50 },
+        'LA': { democraticSupport: 50, republicanSupport: 50 },
+        'MA': { democraticSupport: 50, republicanSupport: 50 },
+        'MD': { democraticSupport: 50, republicanSupport: 50 },
+        'ME': { democraticSupport: 50, republicanSupport: 50 },
+        'MI': { democraticSupport: 50, republicanSupport: 50 },
+        'MN': { democraticSupport: 50, republicanSupport: 50 },
+        'MO': { democraticSupport: 50, republicanSupport: 50 },
+        'MS': { democraticSupport: 50, republicanSupport: 50 },
+        'MT': { democraticSupport: 50, republicanSupport: 50 },
+        'NC': { democraticSupport: 50, republicanSupport: 50 },
+        'ND': { democraticSupport: 50, republicanSupport: 50 },
+        'NE': { democraticSupport: 50, republicanSupport: 50 },
+        'NH': { democraticSupport: 50, republicanSupport: 50 },
+        'NJ': { democraticSupport: 50, republicanSupport: 50 },
+        'NM': { democraticSupport: 50, republicanSupport: 50 },
+        'NV': { democraticSupport: 50, republicanSupport: 50 },
+        'NY': { democraticSupport: 50, republicanSupport: 50 },
+        'OH': { democraticSupport: 50, republicanSupport: 50 },
+        'OK': { democraticSupport: 50, republicanSupport: 50 },
+        'OR': { democraticSupport: 50, republicanSupport: 50 },
+        'PA': { democraticSupport: 50, republicanSupport: 50 },
+        'RI': { democraticSupport: 50, republicanSupport: 50 },
+        'SC': { democraticSupport: 50, republicanSupport: 50 },
+        'SD': { democraticSupport: 50, republicanSupport: 50 },
+        'TN': { democraticSupport: 50, republicanSupport: 50 },
+        'TX': { democraticSupport: 87.08, republicanSupport: 12.32 },
+        'UT': { democraticSupport: 50, republicanSupport: 50 },
+        'VA': { democraticSupport: 50, republicanSupport: 50 },
+        'VT': { democraticSupport: 50, republicanSupport: 50 },
+        'WA': { democraticSupport: 50, republicanSupport: 50 },
+        'WI': { democraticSupport: 50, republicanSupport: 50 },
+        'WV': { democraticSupport: 50, republicanSupport: 50 },
+        'WY': { democraticSupport: 50, republicanSupport: 50 }
+    };
 
-document.getElementById('campaignDemocrats').addEventListener('click', function() {
-    isCampaignSelected = true;
-    selectedCampaign = "Democrats";
-    document.getElementById('campaignButtons').style.display = 'none';
-    setupMapClickHandler();
-});
-
-document.getElementById('campaignRepublicans').addEventListener('click', function() {
-    isCampaignSelected = true;
-    selectedCampaign = "Republicans";
-    document.getElementById('campaignButtons').style.display = 'none';
-    setupMapClickHandler();
-});
-
-document.getElementById('electionMap').addEventListener('load', function() {
-    svgDoc = this.contentDocument;
-});
-
-function setupMapClickHandler() {
-    const states = svgDoc.querySelectorAll('path');
-    
-    states.forEach(function(state) {
-        state.addEventListener('click', function() {
-            if (!isCampaignSelected) {
-                alert("Please select a campaign first!");
-                return;
-            }
-            updateStateInfo(this.id);
+        document.getElementById('campaignDemocrats').addEventListener('click', function() {
+            isCampaignSelected = true;
+            selectedCampaign = "Democrats";
+            document.getElementById('campaignButtons').style.display = 'none';
+            setupMapClickHandler();
         });
-    });
-}
 
-function updateStateInfo(stateId) {
-    // ... rest of the updateStateInfo function ...
-}
+        document.getElementById('campaignRepublicans').addEventListener('click', function() {
+            isCampaignSelected = true;
+            selectedCampaign = "Republicans";
+            document.getElementById('campaignButtons').style.display = 'none';
+            setupMapClickHandler();
+        });
 
-function campaignInState(stateId) {
-    // ... rest of the campaignInState function ...
-}
+        document.getElementById('electionMap').addEventListener('load', function() {
+            svgDoc = this.contentDocument;
+        });
 
+        function setupMapClickHandler() {
+            const states = svgDoc.querySelectorAll('path');
+            
+            states.forEach(function(state) {
+                state.addEventListener('click', function() {
+                    if (!isCampaignSelected) {
+                        alert("Please select a campaign first!");
+                        return;
+                    }
+                    updateStateInfo(this.id);
+                });
+            });
+        }
 
         function updateStateInfo(stateId) {
             const stateElement = svgDoc.querySelector(`#${stateId}`);
