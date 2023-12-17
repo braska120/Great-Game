@@ -13,35 +13,58 @@
 <body>
     <h1>Election Simulator</h1>
     <object id="electionMap" type="image/svg+xml" data="mapofuswithstates.svg"></object>
+    <div>
+        <button id="campaignDemocrats">Campaign for Democrats</button>
+        <button id="campaignRepublicans">Campaign for Republicans</button>
+    </div>
     <div id="stateInfo"></div>
-    
+
     <script>
-        document.getElementById('electionMap').addEventListener('load', function() {
-    const svgDoc = this.contentDocument;
-    const states = svgDoc.querySelectorAll('path');
-    
-    states.forEach(function(state) {
-        state.addEventListener('click', function() {
-            updateStateInfo(this.id);
+        let isCampaignSelected = false;
+        let svgDoc;
+
+        document.getElementById('campaignDemocrats').addEventListener('click', function() {
+            isCampaignSelected = true;
+            enableMapInteractivity();
         });
-    });
-});
 
-        
+        document.getElementById('campaignRepublicans').addEventListener('click', function() {
+            isCampaignSelected = true;
+            enableMapInteractivity();
+        });
 
-function updateStateInfo(stateId) {
-    let text;
-    if (stateId === "TX") {
-        text = `Texas Democratic Support: 87.08%, Republican Support: 12.32%, Overall Lean: Democratic`;
-    } else {
-        const stateName = this.contentDocument.querySelector(`#${stateId}`).getAttribute('data-name') || stateId;
-        text = `You have clicked on ${stateName}`;
-    }
+        document.getElementById('electionMap').addEventListener('load', function() {
+            svgDoc = this.contentDocument;
+            alert("Please select a campaign to start.");
+        });
 
-    document.getElementById('stateInfo').textContent = text;
-}
+        function enableMapInteractivity() {
+            const states = svgDoc.querySelectorAll('path');
+            
+            states.forEach(function(state) {
+                state.addEventListener('click', function() {
+                    if (isCampaignSelected) {
+                        updateStateInfo(this.id);
+                    } else {
+                        alert("Please select a campaign first!");
+                    }
+                });
+            });
+        }
 
+        function updateStateInfo(stateId) {
+            let text;
+            if (stateId === "TX") {
+                text = `Texas Democratic Support: 87.08%, Republican Support: 12.32%, Overall Lean: Democratic`;
+            } else {
+                // Fetch the full state name for other states
+                const stateElement = svgDoc.querySelector(`#${stateId}`);
+                const stateName = stateElement ? stateElement.getAttribute('data-name') : 'Unknown State';
+                text = `You have clicked on ${stateName}`;
+            }
 
+            document.getElementById('stateInfo').textContent = text;
+        }
     </script>
 </body>
 </html>
