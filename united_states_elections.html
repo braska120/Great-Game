@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Unitd States Election Simulator</title>
-        <style>
+<head>
+    <title>United States Election Simulator</title>
+    <style>
         #stateInfo {
             margin-top: 20px;
             font-size: 16px;
             color: #333;
         }
-        /* Add more styles here */
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <h1>Election Simulator</h1>
     <object id="electionMap" type="image/svg+xml" data="mapofuswithstates.svg"></object>
-    <div> id="stateInfo"</div>
+    <div id="stateInfo"></div>
     
     <script>
-      document.getElementById('svgMap').addEventListener('load', function() {
-    const svgDoc = this.contentDocument;
-    const states = svgDoc.querySelectorAll('path');
-    
-    states.forEach(function(state) {
-        state.addEventListener('click', function() {
-            const stateName = this.getAttribute('data-name') || this.id;
-            updateStateInfo(`You have clicked on ${stateName}`);
+        document.getElementById('electionMap').addEventListener('load', function() {
+            const svgDoc = this.contentDocument;
+            const states = svgDoc.querySelectorAll('path');
+            
+            states.forEach(function(state) {
+                state.addEventListener('click', function() {
+                    const stateName = this.getAttribute('data-name') || this.id;
+                    updateStateInfo(`You have clicked on ${stateName}`);
+                });
+            });
         });
-    });
-});
 
-function updateStateInfo(text) {
-    document.getElementById('stateInfo').textContent = text;
-}
-
+        function updateStateInfo(text) {
+            document.getElementById('stateInfo').textContent = text;
+        }
     </script>
-  </body>
+</body>
 </html>
