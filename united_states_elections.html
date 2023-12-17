@@ -85,14 +85,22 @@
             }
         }
 
-        function campaignInTexas() {
-            if (selectedCampaign === "Democrats") {
-                texasData.democraticSupport += 1.5;
-            } else if (selectedCampaign === "Republicans") {
-                texasData.republicanSupport += 1.5;
-            }
-            updateStateInfo('TX'); // Update the displayed info
-        }
+function campaignInTexas() {
+    const campaignBoost = 1.5; // The amount of support to add or subtract
+
+    if (selectedCampaign === "Democrats") {
+        // Increase Democratic support and decrease Republican support
+        texasData.democraticSupport = Math.min(texasData.democraticSupport + campaignBoost, 100);
+        texasData.republicanSupport = Math.max(100 - texasData.democraticSupport, 0);
+    } else if (selectedCampaign === "Republicans") {
+        // Increase Republican support and decrease Democratic support
+        texasData.republicanSupport = Math.min(texasData.republicanSupport + campaignBoost, 100);
+        texasData.democraticSupport = Math.max(100 - texasData.republicanSupport, 0);
+    }
+
+    updateStateInfo('TX'); // Update the displayed info
+}
+
     </script>
 </body>
 </html>
