@@ -76,39 +76,46 @@ let stateData = {
     'WY': { democraticSupport: 50, republicanSupport: 50 }
 };
 
-        };
+document.getElementById('campaignDemocrats').addEventListener('click', function() {
+    isCampaignSelected = true;
+    selectedCampaign = "Democrats";
+    document.getElementById('campaignButtons').style.display = 'none';
+    setupMapClickHandler();
+});
 
-        document.getElementById('campaignDemocrats').addEventListener('click', function() {
-            isCampaignSelected = true;
-            selectedCampaign = "Democrats";
-            document.getElementById('campaignButtons').style.display = 'none';
-            setupMapClickHandler();
+document.getElementById('campaignRepublicans').addEventListener('click', function() {
+    isCampaignSelected = true;
+    selectedCampaign = "Republicans";
+    document.getElementById('campaignButtons').style.display = 'none';
+    setupMapClickHandler();
+});
+
+document.getElementById('electionMap').addEventListener('load', function() {
+    svgDoc = this.contentDocument;
+});
+
+function setupMapClickHandler() {
+    const states = svgDoc.querySelectorAll('path');
+    
+    states.forEach(function(state) {
+        state.addEventListener('click', function() {
+            if (!isCampaignSelected) {
+                alert("Please select a campaign first!");
+                return;
+            }
+            updateStateInfo(this.id);
         });
+    });
+}
 
-        document.getElementById('campaignRepublicans').addEventListener('click', function() {
-            isCampaignSelected = true;
-            selectedCampaign = "Republicans";
-            document.getElementById('campaignButtons').style.display = 'none';
-            setupMapClickHandler();
-        });
+function updateStateInfo(stateId) {
+    // ... rest of the updateStateInfo function ...
+}
 
-        document.getElementById('electionMap').addEventListener('load', function() {
-            svgDoc = this.contentDocument;
-        });
+function campaignInState(stateId) {
+    // ... rest of the campaignInState function ...
+}
 
-        function setupMapClickHandler() {
-            const states = svgDoc.querySelectorAll('path');
-            
-            states.forEach(function(state) {
-                state.addEventListener('click', function() {
-                    if (!isCampaignSelected) {
-                        alert("Please select a campaign first!");
-                        return;
-                    }
-                    updateStateInfo(this.id);
-                });
-            });
-        }
 
         function updateStateInfo(stateId) {
             const stateElement = svgDoc.querySelector(`#${stateId}`);
