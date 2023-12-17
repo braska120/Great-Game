@@ -93,19 +93,20 @@
             svgDoc = this.contentDocument;
         });
 
-        function setupMapClickHandler() {
-            const states = svgDoc.querySelectorAll('path');
-            
-            states.forEach(function(state) {
-                state.addEventListener('click', function() {
-                    if (!isCampaignSelected) {
-                        alert("Please select a campaign first!");
-                        return;
-                    }
-                    updateStateInfo(this.id);
-                });
-            });
-        }
+function setupMapClickHandler() {
+    const states = svgDoc.querySelectorAll('path');
+    
+    states.forEach(function(state) {
+        state.addEventListener('click', function() {
+            if (!isCampaignSelected) {
+                alert("Please choose a party to campaign for first!");
+                return;
+            }
+            updateStateInfo(this.id);
+        });
+    });
+}
+
 
         function updateStateInfo(stateId) {
             const stateElement = svgDoc.querySelector(`#${stateId}`);
