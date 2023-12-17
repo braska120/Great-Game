@@ -21,16 +21,23 @@
 
     <script>
         let isCampaignSelected = false;
+        let selectedCampaign = "";
         let svgDoc;
+        let texasData = {
+            democraticSupport: 87.08, // Initial support
+            republicanSupport: 12.32
+        };
 
         document.getElementById('campaignDemocrats').addEventListener('click', function() {
             isCampaignSelected = true;
+            selectedCampaign = "Democrats";
             document.getElementById('campaignButtons').style.display = 'none';
             enableMapInteractivity();
         });
 
         document.getElementById('campaignRepublicans').addEventListener('click', function() {
             isCampaignSelected = true;
+            selectedCampaign = "Republicans";
             document.getElementById('campaignButtons').style.display = 'none';
             enableMapInteractivity();
         });
@@ -54,22 +61,37 @@
             });
         }
 
-        function enableMapInteractivity() {
-            // Functionality to enable map interactivity can be added here if needed
-        }
+
 
         function updateStateInfo(stateId) {
             let text;
             if (stateId === "TX") {
-                text = `Texas Democratic Support: 87.08%, Republican Support: 12.32%, Overall Lean: Democratic`;
+                text = `Texas Democratic Support: ${texasData.democraticSupport.toFixed(2)}%, Republican Support: ${texasData.republicanSupport.toFixed(2)}%, Overall Lean: Democratic`;
+                text += `<br><button id="campaignInTexas">Campaign in Texas</button>`;
             } else {
-                // Fetch the full state name for other states
                 const stateElement = svgDoc.querySelector(`#${stateId}`);
                 const stateName = stateElement ? stateElement.getAttribute('data-name') : 'Unknown State';
                 text = `You have clicked on ${stateName}`;
             }
 
-            document.getElementById('stateInfo').textContent = text;
+            document.getElementById('stateInfo').innerHTML = text; // Use innerHTML to include button
+
+            // Add event listener to the new button
+            const campaignButton = document.getElementById('campaignInTexas');
+            if (campaignButton) {
+                campaignButton.addEventListener('click', function() {
+                    campaignInTexas();
+                });
+            }
+        }
+
+        function campaignInTexas() {
+            if (selectedCampaign === "Democrats") {
+                texasData.democraticSupport += 1.5;
+            } else if (selectedCampaign === "Republicans") {
+                texasData.republicanSupport += 1.5;
+            }
+            updateStateInfo('TX'); // Update the displayed info
         }
     </script>
 </body>
