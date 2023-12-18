@@ -93,12 +93,11 @@
 
         document.getElementById('electionMap').addEventListener('load', function() {
             svgDoc = this.contentDocument;
-            setupMapClickHandler(); // Attach the event listener after the SVG is loaded
+            setupMapClickHandler();
         });
 
         function setupMapClickHandler() {
             const states = svgDoc.querySelectorAll('path');
-            
             states.forEach(function(state) {
                 state.addEventListener('click', function() {
                     if (!isCampaignSelected) {
@@ -113,9 +112,9 @@
         function updateStateInfo(stateId) {
             const stateElement = svgDoc.querySelector(`#${stateId}`);
             const stateName = stateElement ? stateElement.getAttribute('data-name') : 'Unknown State';
-            let text = `<strong>${stateName}</strong><br>`; // Display the state name in bold
+            let text = `<strong>${stateName}</strong><br>`;
 
-            if (stateId === "AK" or stateId === "HI") {
+            if (stateId === "AK" || stateId === "HI") {
                 text += "This territory has no electoral votes. Therefore, no campaign is available.";
             } else if (stateData[stateId]) {
                 text += `Democratic Support: ${stateData[stateId].democraticSupport.toFixed(2)}%, Republican Support: ${stateData[stateId].republicanSupport.toFixed(2)}%`;
