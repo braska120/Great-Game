@@ -25,6 +25,7 @@
         let selectedCampaign = "";
         let svgDoc;
         let stateData = {
+   let stateData = {
         'AL': { democraticSupport: 97.03, republicanSupport: 2.8 },
         'AR': { democraticSupport: 81.80, republicanSupport: 17.86 },
         'AZ': { democraticSupport: 69.85, republicanSupport: 26.93 },
@@ -74,6 +75,7 @@
         'WV': { democraticSupport: 50, republicanSupport: 50 },
         'WY': { democraticSupport: 50, republicanSupport: 50 }
     };
+        };
 
         document.getElementById('campaignDemocrats').addEventListener('click', function() {
             isCampaignSelected = true;
@@ -91,22 +93,22 @@
 
         document.getElementById('electionMap').addEventListener('load', function() {
             svgDoc = this.contentDocument;
+            setupMapClickHandler(); // Attach the event listener after the SVG is loaded
         });
 
-function setupMapClickHandler() {
-    const states = svgDoc.querySelectorAll('path');
-    
-    states.forEach(function(state) {
-        state.addEventListener('click', function() {
-            if (!isCampaignSelected) {
-                alert("Please choose a party to campaign for first!");
-                return;
-            }
-            updateStateInfo(this.id);
-        });
-    });
-}
-
+        function setupMapClickHandler() {
+            const states = svgDoc.querySelectorAll('path');
+            
+            states.forEach(function(state) {
+                state.addEventListener('click', function() {
+                    if (!isCampaignSelected) {
+                        alert("Please choose a party to campaign for first!");
+                        return;
+                    }
+                    updateStateInfo(this.id);
+                });
+            });
+        }
 
         function updateStateInfo(stateId) {
             const stateElement = svgDoc.querySelector(`#${stateId}`);
