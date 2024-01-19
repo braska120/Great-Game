@@ -11,14 +11,17 @@
     <div id="simulator-container">
         <h1>Enhanced Numerical Battle Simulator</h1>
         <form id="input-form">
-            <label for="soldiers">Soldiers:</label>
-            <input type="number" id="soldiers" name="soldiers" min="0" required><br>
+            <label for="attacking_infantry">Attacking_Infantry:</label>
+            <input type="number" id="attacking_infantry" name="attacking_infantry" min="0" required><br>
 
-            <label for="cavalry">Cavalry:</label>
-            <input type="number" id="cavalry" name="cavalry" min="0" required><br>
+            <label for="defending_infantry">Defending_Infantry:</label>
+            <input type="number" id="defending_infantry" name="defending_infantry" min="0" required><br>
+            
+            <label for="attacking_calvary">Attacking_Calvary:</label>
+            <input type="number" id="attacking_calvary" name="attacking_calvary" min="0" required><br>
 
-            <label for="tanks">Tanks:</label>
-            <input type="number" id="tanks" name="tanks" min="0" required><br>
+            <label for="defending_calvary">Defending_Calvary:</label>
+            <input type="number" id="defending_calvary" name="defending_calvary" min="0" required><br>
 
             <label for="fortifications">Fortifications:</label>
             <input type="number" id="fortifications" name="fortifications" min="0" required><br>
@@ -48,11 +51,11 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // Function to calculate battle outcome
-    function calculateBattleOutcome(soldiers, cavalry, tanks, fortifications, terrain, buffs) {
+    function calculateBattleOutcome(infantry, cavalry, armor, fortifications, terrain, buffs) {
         // Example calculation logic (to be expanded based on specific rules)
-        let soldierStrength = soldiers * 1; // Example coefficient for soldier strength
+        let infantrytrength = infantry * 1; // Example coefficient for soldier strength
         let cavalryStrength = cavalry * 1.5; // Cavalry has higher strength
-        let tankStrength = tanks * 3; // Tanks have the highest strength
+        let armortrength = armor * 3; // armor have the highest strength
 
         // Terrain factor (simplified example)
         let terrainFactor = 1;
@@ -61,16 +64,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 cavalryStrength *= 0.8; // Cavalry less effective in forest
                 break;
             case 'mountains':
-                soldierStrength *= 0.7; // Soldiers less effective in mountains
+                infantrytrength *= 0.7; // infantry less effective in mountains
                 break;
             case 'urban':
-                tankStrength *= 0.9; // Tanks less effective in urban areas
+                armortrength *= 0.9; // armor less effective in urban areas
                 break;
             // No change for 'plains'
         }
 
         // Calculate total strength
-        let totalStrength = soldierStrength + cavalryStrength + tankStrength;
+        let totalStrength = infantrytrength + cavalryStrength + armortrength;
 
         // Factor in fortifications
         totalStrength += fortifications * 2; // Example fortification bonus
@@ -85,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Example outcome calculation
-        let casualties = Math.round(soldiers * 0.3 + cavalry * 0.2 + tanks * 0.1); // Example casualty calculation
+        let casualties = Math.round(infantry * 0.3 + cavalry * 0.2 + armor * 0.1); // Example casualty calculation
         return { winner: totalStrength > 100 ? 'Player' : 'Enemy', casualties: casualties };
     }
 
@@ -94,15 +97,15 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
 
         // Retrieve and validate inputs
-        let soldiers = parseInt(document.getElementById('soldiers').value) || 0;
+        let infantry = parseInt(document.getElementById('infantry').value) || 0;
         let cavalry = parseInt(document.getElementById('cavalry').value) || 0;
-        let tanks = parseInt(document.getElementById('tanks').value) || 0;
+        let armor = parseInt(document.getElementById('armor').value) || 0;
         let fortifications = parseInt(document.getElementById('fortifications').value) || 0;
         let terrain = document.getElementById('terrain').value;
         let buffs = document.getElementById('buffs').value;
 
         // Calculate the battle outcome
-        let outcome = calculateBattleOutcome(soldiers, cavalry, tanks, fortifications, terrain, buffs);
+        let outcome = calculateBattleOutcome(infantry, cavalry, armor, fortifications, terrain, buffs);
 
         // Display the result
         let resultElement = document.getElementById('result');
